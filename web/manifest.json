@@ -1,6 +1,6 @@
 {
-    "name": "click_counter",
-    "short_name": "click_counter",
+    "name": "dtu_project",
+    "short_name": "dtu_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
