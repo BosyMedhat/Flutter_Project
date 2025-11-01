@@ -14,7 +14,7 @@ class CarTypePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Car Type', style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF1A2A6C),
+ 
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
@@ -22,19 +22,7 @@ class CarTypePage extends StatelessWidget {
           },
         ),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF002E6D),
-              Color(0xFF006F9E),
-              Color(0xFF3A7BB9),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: SafeArea(
+      body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -85,7 +73,7 @@ class CarTypePage extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      
     );
   }
 }

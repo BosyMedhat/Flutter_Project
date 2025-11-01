@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "animate_gradient",
+      "rootUri": "file:///C:/Users/Ahmed/AppData/Local/Pub/Cache/hosted/pub.dev/animate_gradient-0.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "async",
       "rootUri": "file:///C:/Users/Ahmed/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.13.0",
       "packageUri": "lib/",

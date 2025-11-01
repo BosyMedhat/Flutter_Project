@@ -38,15 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF002E6D), Color(0xFF006F9E), Color(0xFF3A7BB9)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Center(
+      body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
             child: Column(
@@ -146,10 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         value: 'Customer',
                         child: Text('Customer'),
                       ),
-                      DropdownMenuItem(
-                        value: 'Driver',
-                        child: Text('Driver'),
-                      ),
+                      DropdownMenuItem(value: 'Driver', child: Text('Driver')),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -168,7 +157,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SignInPage()),
+                          builder: (context) => const SignInPage(),
+                        ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -192,7 +182,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignInPage()),
+                        builder: (context) => const SignInPage(),
+                      ),
                     );
                   },
                   child: const Text(
@@ -204,7 +195,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
         ),
-      ),
+     
     );
   }
 }
