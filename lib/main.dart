@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'features/presentation/auth/sign_in.dart';
 
 void main() {
@@ -10,8 +11,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+
+        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
+      ),
+
+      darkTheme: ThemeData.dark().copyWith(
+        textTheme: GoogleFonts.cairoTextTheme(ThemeData.dark().textTheme),
+      ),
       home: MainPage(),
     );
   }
@@ -48,10 +58,7 @@ class MainPage extends StatelessWidget {
             const SizedBox(height: 20),
             const Text(
               'Your journey starts here',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white70,
-              ),
+              style: TextStyle(fontSize: 20, color: Colors.white70),
             ),
             const SizedBox(height: 50),
             ElevatedButton(
@@ -64,8 +71,10 @@ class MainPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: const Color(0xFF002E6D),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 80, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 80,
+                  vertical: 16,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
