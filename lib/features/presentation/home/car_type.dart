@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class CarTypePage extends StatelessWidget {
   final List<Map<String, dynamic>> carTypes = [
     {'name': 'Sedan', 'icon': Icons.directions_car},
@@ -8,14 +7,12 @@ class CarTypePage extends StatelessWidget {
     {'name': 'Electric', 'icon': Icons.electric_car},
     {'name': 'Luxury', 'icon': Icons.star},
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Car Type', style: TextStyle(color: Colors.white)),
- 
-        leading: IconButton(
+       leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
@@ -62,7 +59,6 @@ class CarTypePage extends StatelessWidget {
                           trailing: const Icon(Icons.arrow_forward_ios,
                               color: Colors.white54, size: 18),
                           onTap: () {
-                            // مجرد UI، مفيش actions
                           },
                         ),
                       );
