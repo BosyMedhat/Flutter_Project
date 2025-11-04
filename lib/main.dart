@@ -1,4 +1,6 @@
+import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'features/presentation/auth/sign_in.dart';
 
 void main() {
@@ -7,11 +9,38 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  //  textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textTheme: GoogleFonts.kadwaTextTheme(ThemeData.light().textTheme),
+
+        scaffoldBackgroundColor: Colors.transparent,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      ),
+
+      builder: (context, child) {
+        return AnimateGradient(
+          duration: Duration(seconds: 3),
+
+          primaryColors: [
+            Color(0xFF6A11CB),
+            Color(0xFF2575FC),
+            Color(0xFFF7971E),
+          ],
+          secondaryColors: [
+            Color(0xFF2575FC),
+            Color(0xFFF7971E),
+            Color(0xFF6A11CB),
+          ],
+          child: child!,
+        );
+      },
       home: MainPage(),
     );
   }
@@ -23,16 +52,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF002E6D), Color(0xFF006F9E), Color(0xFF3A7BB9)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -48,10 +68,7 @@ class MainPage extends StatelessWidget {
             const SizedBox(height: 20),
             const Text(
               'Your journey starts here',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white70,
-              ),
+              style: TextStyle(fontSize: 20, color: Colors.white70),
             ),
             const SizedBox(height: 50),
             ElevatedButton(
@@ -64,8 +81,10 @@ class MainPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: const Color(0xFF002E6D),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 80, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 80,
+                  vertical: 16,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),

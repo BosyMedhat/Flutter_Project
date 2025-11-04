@@ -24,85 +24,77 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
 
-        backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(color: Color(0xFFE0E0E0)),
       ),
       extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF002E6D), Color(0xFF006F9E), Color(0xFF3A7BB9)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [0.1, 0.5, 1.0],
-            tileMode: TileMode.mirror,
-          ),
-        ),
-        padding: const EdgeInsets.all(24),
-        child: ListView(
-          children: [
-            const SizedBox(height: 10),
-            const Text(
-              '🔄 Update Email',
-              style: TextStyle(
-                color: Color(0xFFE0E0E0),
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: ListView(
+            children: [
+              const SizedBox(height: 10),
+              const Text(
+                '🔄 Update Email',
+                style: TextStyle(
+                  color: Color(0xFFE0E0E0),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () => _showEmailChangeForm(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1A2A6C),
-                foregroundColor: Colors.white,
+              ElevatedButton(
+                onPressed: () => _showEmailChangeForm(context),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1A2A6C),
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('Change Email'),
               ),
-              child: const Text('Change Email'),
-            ),
-            const SizedBox(height: 30),
-            const Text(
-              '🔐 Update Password',
-              style: TextStyle(
-                color: Color(0xFFE0E0E0),
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 30),
+              const Text(
+                '🔐 Update Password',
+                style: TextStyle(
+                  color: Color(0xFFE0E0E0),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () => _showPasswordChangeForm(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1A2A6C),
-                foregroundColor: Colors.white,
+              ElevatedButton(
+                onPressed: () => _showPasswordChangeForm(context),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1A2A6C),
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('Change Password'),
               ),
-              child: const Text('Change Password'),
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => HomePage(username: widget.username),
+              const SizedBox(height: 30),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => HomePage(username: widget.username),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.arrow_back, color: Color(0xFFE0E0E0)),
+                label: const Text(
+                  "Back to Home",
+                  style: TextStyle(color: Color(0xFFE0E0E0)),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  side: const BorderSide(color: Color(0xFFE0E0E0)),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 14,
                   ),
-                );
-              },
-              icon: const Icon(Icons.arrow_back, color: Color(0xFFE0E0E0)),
-              label: const Text(
-                "Back to Home",
-                style: TextStyle(color: Color(0xFFE0E0E0)),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                side: const BorderSide(color: Color(0xFFE0E0E0)),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 14,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
