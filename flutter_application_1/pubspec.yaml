@@ -1,0 +1,50 @@
+name: flutter_application_1
+description: "A new Flutter project."
+
+publish_to: 'none'  # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Localization support
+  flutter_localizations:
+    sdk: flutter
+
+  # Default dependencies
+  cupertino_icons: ^1.0.8
+
+  # Additional packages
+  intl: 0.20.2  # تم تخفيض الإصدار ليتوافق مع flutter_localizations
+  material_color_utilities: ^0.11.1
+  vector_math: ^2.1.4
+
+  # ✅ Font Awesome icons package
+  font_awesome_flutter: ^10.6.0
+
+  # إضافة مكتبة Google Maps
+  google_maps_flutter: ^2.2.0  # تأكد من استخدام أحدث نسخة
+
+  permission_handler: ^11.3.1
+  # إضافة مكتبة Flutter Map
+  flutter_map: ^4.0.0  # ترقية للإصدار 4.0.0
+  latlong2: ^0.8.1  # مكتبة لاستخدام الإحداثيات في flutter_map
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Localization assets
+  generate: true
+  assets:
+    - lib/l10n/

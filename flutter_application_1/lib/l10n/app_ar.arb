@@ -1,0 +1,21 @@
+{
+  "settings": "الإعدادات",
+  "updateEmail": "تحديث البريد الإلكتروني",
+  "updatePassword": "تحديث كلمة المرور",
+  "changeLanguage": "تغيير اللغة",
+  "backToHome": "العودة للرئيسية",
+  "changeEmail": "تغيير البريد الإلكتروني",
+  "changePassword": "تغيير كلمة المرور",
+  "currentEmail": "البريد الإلكتروني الحالي",
+  "newEmail": "البريد الإلكتروني الجديد",
+  "confirmNewEmail": "تأكيد البريد الجديد",
+  "emailsDoNotMatch": "البريد الإلكتروني غير متطابق",
+  "currentPassword": "كلمة المرور الحالية",
+  "newPassword": "كلمة المرور الجديدة",
+  "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+  "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
+  "emailUpdated": "تم تحديث البريد الإلكتروني بنجاح",
+  "passwordUpdated": "تم تحديث كلمة المرور بنجاح",
+  "cancel": "إلغاء",
+  "save": "حفظ"
+}

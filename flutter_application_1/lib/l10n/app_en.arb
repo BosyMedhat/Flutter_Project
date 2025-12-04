@@ -1,0 +1,21 @@
+{
+  "settings": "Settings",
+  "updateEmail": "Update Email",
+  "updatePassword": "Update Password",
+  "changeLanguage": "Change Language",
+  "backToHome": "Back to Home",
+  "changeEmail": "Change Email",
+  "changePassword": "Change Password",
+  "currentEmail": "Current Email",
+  "newEmail": "New Email",
+  "confirmNewEmail": "Confirm New Email",
+  "emailsDoNotMatch": "Emails do not match",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "emailUpdated": "Email updated successfully",
+  "passwordUpdated": "Password updated successfully",
+  "cancel": "Cancel",
+  "save": "Save"
+}
