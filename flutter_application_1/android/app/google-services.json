@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "834245101426",
+    "project_id": "voyaa-dtu-app",
+    "storage_bucket": "voyaa-dtu-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834245101426:android:c396ffe0149bd434cd7feb",
+        "android_client_info": {
+          "package_name": "com.example.dtu_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1X1ZGlYXNrnWCowUloBJCkbCwCgAHDgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834245101426:android:ac41aaa3d882ddbecd7feb",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1X1ZGlYXNrnWCowUloBJCkbCwCgAHDgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
