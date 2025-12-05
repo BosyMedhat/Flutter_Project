@@ -4,13 +4,12 @@ import 'package:flutter_application_1/auth/auth_servies.dart';
 import 'home_page.dart';
 
 class SettingsPage extends StatefulWidget {
-  final String username;
-  final VoidCallback toggleLanguage;
+  // final String username;
 
   const SettingsPage({
     super.key,
-    required this.username,
-    required this.toggleLanguage,
+    // required this.username,
+   
   });
 
   @override
@@ -82,7 +81,9 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const SizedBox(height: 30),
             ElevatedButton(
-              onPressed: widget.toggleLanguage,
+              onPressed: (){
+
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1A2A6C),
                 foregroundColor: Colors.white,
@@ -113,30 +114,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => HomePage(username: widget.username),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.arrow_back, color: Color(0xFFE0E0E0)),
-              label: const Text(
-                "Back to Home",
-                style: TextStyle(color: Color(0xFFE0E0E0)),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                side: const BorderSide(color: Color(0xFFE0E0E0)),
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ),
+           
           ],
         ),
       ),

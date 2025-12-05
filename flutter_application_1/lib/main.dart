@@ -1,8 +1,12 @@
 import 'package:animate_gradient/animate_gradient.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // 1. ضيفنا دي
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/auth/SignInPage.dart';
+import 'package:flutter_application_1/screens/bottom_nav_bar.dart';
+import 'package:flutter_application_1/screens/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,20 +24,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.kadwaTextTheme(ThemeData.light().textTheme),
         scaffoldBackgroundColor: Colors.transparent,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
       ),
       builder: (context, child) {
         return AnimateGradient(
-          duration: Duration(seconds: 3),
-          primaryColors: [
+          duration: const Duration(seconds: 3),
+          primaryColors: const [
             Color(0xFF6A11CB),
             Color(0xFF2575FC),
             Color(0xFFF7971E),
           ],
-          secondaryColors: [
+          secondaryColors: const [
             Color(0xFF2575FC),
             Color(0xFFF7971E),
             Color(0xFF6A11CB),
@@ -41,7 +45,24 @@ class MyApp extends StatelessWidget {
           child: child!,
         );
       },
-      home: MainPage(),
+      home: const AuthGate(),
+    );
+  }
+}
+
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return const MainLayout();
+        }
+        return const MainPage();
+      },
     );
   }
 }
@@ -73,7 +94,7 @@ class MainPage extends StatelessWidget {
             const SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const SignInPage()),
                 );
