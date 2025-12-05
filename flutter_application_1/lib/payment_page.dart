@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'credit_card_page.dart';
+// import 'credit_card_page.dart';
 import 'cash_page.dart';
 import 'wallet_page.dart';
 
@@ -50,12 +50,12 @@ class PaymentPage extends StatelessWidget {
                 style: TextStyle(color: Colors.white70, fontSize: 18),
               ),
               const SizedBox(height: 20),
-              _buildPaymentOption(
-                context,
-                FontAwesomeIcons.creditCard,
-                'Credit Card',
-                const CreditCardPage(),
-              ),
+              // _buildPaymentOption(
+              //   context,
+              //   FontAwesomeIcons.creditCard,
+              //   'Credit Card',
+              //   // const CreditCardPage(),
+              // ),
               _buildPaymentOption(
                 context,
                 FontAwesomeIcons.moneyBillWave,

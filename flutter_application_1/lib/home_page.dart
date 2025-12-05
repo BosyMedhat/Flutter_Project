@@ -1,219 +1,214 @@
 import 'package:flutter/material.dart';
-import 'car_type_page.dart';
-import 'trip_review_page.dart';
-import 'track_car_page.dart';
-import 'driver_details_page.dart';
-import 'chat_with_driver_page.dart';
-import 'payment_page.dart';
-import 'rate_driver_page.dart';
-import 'SignInPage.dart';
+import 'package:flutter_application_1/auth/auth_servies.dart';
+import 'package:flutter_application_1/car_type_page.dart';
+import 'package:flutter_application_1/chat_with_driver_page.dart';
+import 'package:flutter_application_1/driver_details_page.dart';
+import 'package:flutter_application_1/location_page.dart';
+import 'package:flutter_application_1/payment_page.dart';
+import 'package:flutter_application_1/rate_driver_page.dart';
+import 'package:flutter_application_1/track_car_page.dart';
+import 'package:flutter_application_1/trip_review_page.dart';
+import 'package:flutter_application_1/widget/home_card.dart';
 import 'settings_page.dart';
-import 'location_page.dart';  // استيراد صفحة الموقع
 
 class HomePage extends StatefulWidget {
-  final String username;
-
-  const HomePage({required this.username, super.key});
+  final String? username;
+  const HomePage({this.username, super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isArabic = false;
-
-  void toggleLanguage() {
-    setState(() {
-      isArabic = !isArabic;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF002E6D), // أزرق داكن جدًا
-              Color(0xFF006F9E), // أزرق متألق
-              Color(0xFF3A7BB9), // أزرق لامع
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [0.1, 0.5, 1.0],
-            tileMode: TileMode.mirror,
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              const Text(
-                'VOYAA 🚗',
-                style: TextStyle(
-                  fontSize: 34,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFE0E0E0), // فضي لامع
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Text(
+              'Welcome, ${AuthService().getUsername().toString()}!',
+              style: const TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 10),
-              Text(
-                isArabic ? 'مرحباً، ${widget.username}!' : 'Welcome, ${widget.username}!',
-                style: const TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 30),
-              Expanded(
-                child: GridView.count(
-                  padding: const EdgeInsets.all(20),
+            ),
+            const SizedBox(height: 30),
+            Expanded(
+              child: GridView(
+                padding: const EdgeInsets.all(20),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20,
-                  children: [
-                    _buildFeatureCard(context, Icons.map, isArabic ? 'الموقع' : 'Location', () {
+                ),
+                children: [
+                  HomeCard(
+                    icon: Icons.map,
+                    label: 'Location',
+                    onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const LocationPage()), // تفعيل الزر للانتقال إلى صفحة الموقع
+                        MaterialPageRoute(builder: (_) => LocationPage()),
                       );
-                    }),
-                    _buildFeatureCard(
-                      context,
-                      Icons.directions_car,
-                      isArabic ? 'نوع السيارة' : 'Car Type',
-                          () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => CarTypePage())),
-                    ),
-                    _buildFeatureCard(
-                      context,
-                      Icons.reviews,
-                      isArabic ? 'مراجعة الرحلة' : 'Trip Review',
-                          () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => TripReviewPage())),
-                    ),
-                    _buildFeatureCard(
-                      context,
-                      Icons.car_repair,
-                      isArabic ? 'تتبع السيارة' : 'Track Car',
-                          () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => TrackCarPage())),
-                    ),
-                    _buildFeatureCard(
-                      context,
-                      Icons.person,
-                      isArabic ? 'تفاصيل السائق' : 'Driver Details',
-                          () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => DriverDetailsPage())),
-                    ),
-                    _buildFeatureCard(
-                      context,
-                      Icons.chat,
-                      isArabic ? 'الدردشة مع السائق' : 'Chat with Driver',
-                          () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => ChatWithDriverPage())),
-                    ),
-                    _buildFeatureCard(
-                      context,
-                      Icons.payment,
-                      isArabic ? 'الدفع' : 'Payment',
-                          () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => PaymentPage())),
-                    ),
-                    _buildFeatureCard(
-                      context,
-                      Icons.star,
-                      isArabic ? 'تقييم السائق' : 'Rate Driver',
-                          () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => RateDriverPage())),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-
-              // زر الإعدادات
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => SettingsPage(
-                        username: widget.username,
-                        toggleLanguage: toggleLanguage,
-                      ),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.settings),
-                label: Text(isArabic ? 'الإعدادات' : 'Settings'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white24,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    },
                   ),
-                ),
-              ),
-
-              const SizedBox(height: 10),
-
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (_) => const SignInPage()),
-                        (route) => false,
-                  );
-                },
-                icon: const Icon(Icons.exit_to_app),
-                label: Text(isArabic ? 'تسجيل الخروج' : 'Logout'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF00FFF0),
-                  foregroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                  HomeCard(
+                    icon: Icons.directions_car,
+                    label: 'Car Type',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => CarTypePage()),
+                      );
+                    },
                   ),
-                ),
+                  HomeCard(
+                    icon: Icons.reviews,
+                    label: 'Trip Review',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => TripReviewPage()),
+                      );
+                    },
+                  ),
+                  HomeCard(
+                    icon: Icons.car_repair,
+                    label: 'Track Car',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => TrackCarPage()),
+                      );
+                    },
+                  ),
+                  HomeCard(
+                    icon: Icons.person,
+                    label: 'Driver Details',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => DriverDetailsPage()),
+                      );
+                    },
+                  ),
+                  HomeCard(
+                    icon: Icons.chat,
+                    label: 'Chat with Driver',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ChatWithDriverPage()),
+                      );
+                    },
+                  ),
+                  HomeCard(
+                    icon: Icons.payment,
+                    label: 'Payment',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const PaymentPage()),
+                      );
+                    },
+                  ),
+                  HomeCard(
+                    icon: Icons.star,
+                    label: 'Rate Driver',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => RateDriverPage()),
+                      );
+                    },
+                  ),
+                ],
               ),
-
-              const SizedBox(height: 20),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFeatureCard(
-      BuildContext context,
-      IconData icon,
-      String label,
-      Function() onTap,
-      ) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        color: Colors.white.withOpacity(0.1),
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 40, color: const Color(0xFF00FFF0)),
+            ),
             const SizedBox(height: 10),
-            Text(
-              label,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (_) => SettingsPage(
+                          username: widget.username ?? "User",
+                          toggleLanguage: () {},
+                        ),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white.withOpacity(0.2),
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(
+                    color: Colors.white.withOpacity(0.3),
+                    width: 1,
+                  ),
+                ),
+                elevation: 0,
               ),
-            )
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.settings_rounded, size: 22),
+                  SizedBox(width: 8),
+                  Text(
+                    'Settings',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () {
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(builder: (_) => const SignInPage()),
+                //   (route) => false,
+                // );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF00FFF0),
+                foregroundColor: const Color(0xFF002E6D),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 8,
+                shadowColor: const Color(0xFF00FFEE).withOpacity(0.5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.logout_rounded, size: 22),
+                  SizedBox(width: 8),
+                  Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // const SizedBox(height: 20),
           ],
         ),
       ),
