@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/auth/auth_servies.dart';
+import 'package:flutter_application_1/widget/custom_text_form.dart';
 import 'validators.dart';
 import 'SignInPage.dart';
 
@@ -106,46 +107,47 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  TextFormField(
-                    controller: _usernameController,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: _buildInputDecoration('Username', Icons.person),
-                    validator: Validators.validateUsername,
-                    onFieldSubmitted: (_) => _emailFocusNode.requestFocus(),
+                   CustomFiled(
+                    labelText: 'Username',
+                    controller:_usernameController,
+                    focusNode: null,
+                   onFieldSubmitted:  (_) =>_emailFocusNode.requestFocus(),
+                  prefixIcon: Icon(Icons.person, color: const Color(0xFFE0E0E0)),
+                  validator: Validators.validateEmail,
                   ),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _emailController,
-                    focusNode: _emailFocusNode,
-                    keyboardType: TextInputType.emailAddress,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: _buildInputDecoration('Email', Icons.email),
-                    validator: Validators.validateEmail,
-                    onFieldSubmitted: (_) => _passwordFocusNode.requestFocus(),
+  
+                  CustomFiled(
+                    labelText: 'Email',
+
+                    controller: _emailController,focusNode: _emailFocusNode,
+                   onFieldSubmitted:  (_) => _passwordFocusNode.requestFocus(),
+                  prefixIcon: Icon(Icons.email, color: const Color(0xFFE0E0E0)),
+                  validator: Validators.validateEmail,
                   ),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _passwordController,
-                    focusNode: _passwordFocusNode,
+                  CustomFiled(
+                    labelText: 'password',
                     obscureText: true,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: _buildInputDecoration('Password', Icons.lock),
-                    validator: Validators.validatePassword,
-                    onFieldSubmitted: (_) => _confirmPasswordFocusNode.requestFocus(),
+                    controller: _passwordController,focusNode: _passwordFocusNode,
+                   onFieldSubmitted :(_) => _confirmPasswordFocusNode.requestFocus(),
+                  prefixIcon: Icon(Icons.lock, color: const Color(0xFFE0E0E0)),
+                  validator:Validators.validatePassword,  
                   ),
                   const SizedBox(height: 20),
-                  TextFormField(
+                  CustomFiled(
+                    labelText: 'Confirm Password',
+                    obscureText: true,
                     controller: _confirmPasswordController,
                     focusNode: _confirmPasswordFocusNode,
-                    obscureText: true,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: _buildInputDecoration('Confirm Password', Icons.lock_outline),
-                    validator: (value) => Validators.validatePasswordMatch(
+                   onFieldSubmitted : (_) => _submitForm(),
+                  prefixIcon: Icon(Icons.lock_outline, color: const Color(0xFFE0E0E0)),
+                  validator:  (value) => Validators.validatePasswordMatch(
                       value,
                       _passwordController.text,
-                    ),
-                    onFieldSubmitted: (_) => _submitForm(),
+                    ), 
                   ),
+
                   const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: _isLoading ? null : _submitForm,
@@ -201,17 +203,5 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  InputDecoration _buildInputDecoration(String label, IconData icon) {
-    return InputDecoration(
-      labelText: label,
-      labelStyle: const TextStyle(color: Colors.white60),
-      prefixIcon: Icon(icon, color: const Color(0xFFE0E0E0)),
-      filled: true,
-      fillColor: Colors.white.withOpacity(0.1),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        borderSide: BorderSide.none,
-      ),
-    );
-  }
+ 
 }
