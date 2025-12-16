@@ -77,7 +77,6 @@ class _CreditCardPageState extends State<CreditCardPage> {
       ),
     );
   }
-
   Widget _buildCreditCard() {
     return Container(
       width: double.infinity,
@@ -265,3 +264,4 @@ class _CreditCardPageState extends State<CreditCardPage> {
     );
   }
 }
+
