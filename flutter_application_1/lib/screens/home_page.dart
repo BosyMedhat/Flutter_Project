@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/auth/auth_servies.dart';
+import 'package:flutter_application_1/auth/shered_pref.dart';
 import 'package:flutter_application_1/screens/car_type_page.dart';
 import 'package:flutter_application_1/screens/chat_with_driver_page.dart';
 import 'package:flutter_application_1/screens/driver_details_page.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_application_1/screens/rate_driver_page.dart';
 import 'package:flutter_application_1/screens/track_car_page.dart';
 import 'package:flutter_application_1/screens/trip_review_page.dart';
 import 'package:flutter_application_1/widget/home_card.dart';
-import 'settings_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String username = 'User';
-  bool isLoading = true;
 
   @override
   void initState() {
@@ -29,12 +28,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   void fetchName() async {
-    final name = await AuthService().getUsername();
-    if (mounted) {
+    final cachedName = await SharedPrefsHelper.getUsername();
+    if (mounted && cachedName != null) {
       setState(() {
-        username = name ?? 'User';
-        isLoading = false;
+        username = cachedName;
       });
+    }
+
+    final name = await AuthService().getUsername();
+    if (mounted && name != null && name != username) {
+      setState(() {
+        username = name;
+      });
+      await SharedPrefsHelper.saveUsername(name);
     }
   }
 
@@ -43,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient:  LinearGradient(
+          gradient: LinearGradient(
             colors: [Color(0xFF002E6D), Color(0xFF006F9E), Color(0xFF3A7BB9)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -56,16 +62,14 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              isLoading
-                  ? const CircularProgressIndicator()
-                  : Text(
-                    "Welcome, $username 🚗",
-                    style: const TextStyle(
-                      fontSize: 24,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+              Text(
+                "Welcome, $username 🚗",
+                style: const TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               const SizedBox(height: 30),
               Expanded(
                 child: GridView(

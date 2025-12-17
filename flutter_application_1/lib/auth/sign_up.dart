@@ -55,9 +55,9 @@ class _SignUpPageState extends State<SignUpPage> {
     if (!mounted) return;
 
     if (error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(error)));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Account created successfully!')),
@@ -107,32 +107,44 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                   CustomFiled(
+                  CustomFiled(
                     labelText: 'Username',
-                    controller:_usernameController,
+                    controller: _usernameController,
                     focusNode: null,
-                   onFieldSubmitted:  (_) =>_emailFocusNode.requestFocus(),
-                  prefixIcon: Icon(Icons.person, color: const Color(0xFFE0E0E0)),
-                  validator: Validators.validateEmail,
+                    onFieldSubmitted: (_) => _emailFocusNode.requestFocus(),
+                    prefixIcon: Icon(
+                      Icons.person,
+                      color: const Color(0xFFE0E0E0),
+                    ),
+                    validator: Validators.validateUsername,
                   ),
                   const SizedBox(height: 20),
-  
+
                   CustomFiled(
                     labelText: 'Email',
 
-                    controller: _emailController,focusNode: _emailFocusNode,
-                   onFieldSubmitted:  (_) => _passwordFocusNode.requestFocus(),
-                  prefixIcon: Icon(Icons.email, color: const Color(0xFFE0E0E0)),
-                  validator: Validators.validateEmail,
+                    controller: _emailController,
+                    focusNode: _emailFocusNode,
+                    onFieldSubmitted: (_) => _passwordFocusNode.requestFocus(),
+                    prefixIcon: Icon(
+                      Icons.email,
+                      color: const Color(0xFFE0E0E0),
+                    ),
+                    validator: Validators.validateEmail,
                   ),
                   const SizedBox(height: 20),
                   CustomFiled(
                     labelText: 'password',
                     obscureText: true,
-                    controller: _passwordController,focusNode: _passwordFocusNode,
-                   onFieldSubmitted :(_) => _confirmPasswordFocusNode.requestFocus(),
-                  prefixIcon: Icon(Icons.lock, color: const Color(0xFFE0E0E0)),
-                  validator:Validators.validatePassword,  
+                    controller: _passwordController,
+                    focusNode: _passwordFocusNode,
+                    onFieldSubmitted:
+                        (_) => _confirmPasswordFocusNode.requestFocus(),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: const Color(0xFFE0E0E0),
+                    ),
+                    validator: Validators.validatePassword,
                   ),
                   const SizedBox(height: 20),
                   CustomFiled(
@@ -140,19 +152,26 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: true,
                     controller: _confirmPasswordController,
                     focusNode: _confirmPasswordFocusNode,
-                   onFieldSubmitted : (_) => _submitForm(),
-                  prefixIcon: Icon(Icons.lock_outline, color: const Color(0xFFE0E0E0)),
-                  validator:  (value) => Validators.validatePasswordMatch(
-                      value,
-                      _passwordController.text,
-                    ), 
+                    onFieldSubmitted: (_) => _submitForm(),
+                    prefixIcon: Icon(
+                      Icons.lock_outline,
+                      color: const Color(0xFFE0E0E0),
+                    ),
+                    validator:
+                        (value) => Validators.validatePasswordMatch(
+                          value,
+                          _passwordController.text,
+                        ),
                   ),
 
                   const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: _isLoading ? null : _submitForm,
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 80,
+                        vertical: 16,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -160,19 +179,25 @@ class _SignUpPageState extends State<SignUpPage> {
                       foregroundColor: Colors.white,
                       elevation: 5,
                     ),
-                    child: _isLoading
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    child:
+                        _isLoading
+                            ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                            )
+                            : const Text(
+                              'SIGN UP',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
                             ),
-                          )
-                        : const Text(
-                            'SIGN UP',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
                   ),
                   const SizedBox(height: 20),
                   const Text(
@@ -188,10 +213,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                     child: const Text(
                       'Login',
-                      style: TextStyle(
-                        color: Color(0xFFE0E0E0),
-                        fontSize: 16,
-                      ),
+                      style: TextStyle(color: Color(0xFFE0E0E0), fontSize: 16),
                     ),
                   ),
                 ],
@@ -202,6 +224,4 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-
- 
 }
