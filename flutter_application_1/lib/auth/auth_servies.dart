@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_application_1/auth/shered_pref.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -28,6 +29,12 @@ class AuthService {
 
       await userCredential.user!.updateDisplayName(username);
       
+      await SharedPrefsHelper.saveUserData(
+        username: username,
+        email: email,
+        userId: userCredential.user!.uid,
+      );
+      
       return null;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -50,10 +57,20 @@ class AuthService {
     required String password,
   }) async {
     try {
-      await _auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      
+      final username = await getUsername();
+      if (username != null) {
+        await SharedPrefsHelper.saveUserData(
+          username: username,
+          email: email,
+          userId: userCredential.user!.uid,
+        );
+      }
+      
       return null;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -79,6 +96,9 @@ class AuthService {
       await _firestore.collection('users').doc(currentUser!.uid).update({
         'email': newEmail,
       });
+      
+      await SharedPrefsHelper.saveEmail(newEmail);
+      
       return null;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -125,6 +145,7 @@ class AuthService {
 
   Future<void> signOut() async {
     await _auth.signOut();
+    await SharedPrefsHelper.clearUserData();
   }
 
   Future<String?> getUsername() async {
@@ -134,5 +155,9 @@ class AuthService {
     } catch (e) {
       return currentUser?.displayName;
     }
+  }
+
+  Future<String?> getCachedUsername() async {
+    return await SharedPrefsHelper.getUsername();
   }
 }

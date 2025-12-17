@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/auth/auth_servies.dart';
-import 'package:flutter_application_1/screens/home_page.dart';
+import 'package:flutter_application_1/screens/bottom_nav_bar.dart';
 import 'package:flutter_application_1/widget/custom_text_form.dart';
 import 'validators.dart';
 import 'sign_up.dart';
@@ -47,18 +47,16 @@ class _SignInPageState extends State<SignInPage> {
     if (!mounted) return;
 
     if (error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(error)));
     } else {
       final username = await AuthService().getUsername() ?? 'User';
       if (!mounted) return;
-      
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (_) => HomePage(),
-        ),
+        MaterialPageRoute(builder: (_) => MainLayout()),
       );
     }
   }
@@ -101,28 +99,39 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                   CustomFiled(
+                  CustomFiled(
                     labelText: 'Email',
-                    controller: _emailController,focusNode:null,
-                   onFieldSubmitted:  (_) => _passwordFocusNode.requestFocus(),
-                  prefixIcon: Icon(Icons.email, color: const Color(0xFFE0E0E0)),
-                  validator: Validators.validateEmail,
+                    controller: _emailController,
+                    focusNode: null,
+                    onFieldSubmitted: (_) => _passwordFocusNode.requestFocus(),
+                    prefixIcon: Icon(
+                      Icons.email,
+                      color: const Color(0xFFE0E0E0),
+                    ),
+                    validator: Validators.validateEmail,
                   ),
                   const SizedBox(height: 20),
                   CustomFiled(
                     labelText: 'Password',
                     obscureText: true,
-                    controller: _passwordController,focusNode:_passwordFocusNode,
-                   onFieldSubmitted: (_) => _submitForm(),
-                  prefixIcon: Icon(Icons.lock, color: const Color(0xFFE0E0E0)),
-                  validator: Validators.validatePassword,
+                    controller: _passwordController,
+                    focusNode: _passwordFocusNode,
+                    onFieldSubmitted: (_) => _submitForm(),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: const Color(0xFFE0E0E0),
+                    ),
+                    validator: Validators.validatePassword,
                   ),
-                  
+
                   const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: _isLoading ? null : _submitForm,
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 100,
+                        vertical: 16,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -130,19 +139,25 @@ class _SignInPageState extends State<SignInPage> {
                       foregroundColor: Colors.white,
                       elevation: 5,
                     ),
-                    child: _isLoading
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    child:
+                        _isLoading
+                            ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                            )
+                            : const Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
                             ),
-                          )
-                        : const Text(
-                            'LOGIN',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
                   ),
                   const SizedBox(height: 20),
                   const Text(
@@ -151,17 +166,14 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(builder: (_) => const SignUpPage()),
                       );
                     },
                     child: const Text(
                       'Sign Up',
-                      style: TextStyle(
-                        color: Color(0xFFE0E0E0),
-                        fontSize: 16,
-                      ),
+                      style: TextStyle(color: Color(0xFFE0E0E0), fontSize: 16),
                     ),
                   ),
                 ],
@@ -172,5 +184,4 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
   }
-
 }
